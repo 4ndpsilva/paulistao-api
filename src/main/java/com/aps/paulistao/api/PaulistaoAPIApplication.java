@@ -18,7 +18,7 @@ public class PaulistaoAPIApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String url = scraper.montarUrlPesquisa("palmeiras", "corinthians", "08/08/2020");
+		String url = scraper.montarUrlPesquisa("brasil", "colombia", "06/09/19");
 		scraper.getInfoPartida(url);
 	}
 }

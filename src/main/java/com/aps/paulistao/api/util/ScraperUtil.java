@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ import static com.aps.paulistao.api.util.Constants.BASE_URL;
 import static com.aps.paulistao.api.util.Constants.COMPLEMENTO_URL;
 import static com.aps.paulistao.api.util.Constants.DIV_GOLS_MANDANTE;
 import static com.aps.paulistao.api.util.Constants.DIV_GOLS_VISITANTE;
-import static com.aps.paulistao.api.util.Constants.DIV_ITEM_GOLS;
-import static com.aps.paulistao.api.util.Constants.DIV_JOGO_ROLANDO;
 import static com.aps.paulistao.api.util.Constants.DIV_INFO_MANDANTE;
 import static com.aps.paulistao.api.util.Constants.DIV_INFO_VISITANTE;
+import static com.aps.paulistao.api.util.Constants.DIV_ITEM_GOLS;
+import static com.aps.paulistao.api.util.Constants.DIV_JOGO_ROLANDO;
 import static com.aps.paulistao.api.util.Constants.DIV_PARTIDA_ENCERRADA;
 import static com.aps.paulistao.api.util.Constants.DIV_PARTIDA_NAO_INICIADA;
 import static com.aps.paulistao.api.util.Constants.DIV_PENALIDADES;
@@ -33,7 +33,7 @@ import static com.aps.paulistao.api.util.Constants.SPAN;
 import static com.aps.paulistao.api.util.Constants.SRC;
 import static com.aps.paulistao.api.util.Constants.VISITANTE;
 
-@Component
+@Service
 public class ScraperUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScraperUtil.class);
 
@@ -179,9 +179,7 @@ public class ScraperUtil {
     }
 
     public Integer getInfoPenalidades(final Document document, final String tipoEquipe) {
-        boolean isPenalidades = document.select(DIV_PENALIDADES).isEmpty();
-
-        if (!isPenalidades) {
+        if (!document.select(DIV_PENALIDADES).isEmpty()) {
             final String penalidades = document.select(DIV_PENALIDADES).text();
             final String completo    = penalidades.substring(0, 5).replace(" ", "");
             final String[] divisao   = completo.split("-");
@@ -196,8 +194,7 @@ public class ScraperUtil {
         try {
             final String equipeMandante = nomeEquipeMandante.replace(" ", "+").replace("-", "+");
             final String equipeVisitante = nomeEquipeVisitante.replace(" ", "+").replace("-", "+");
-
-        return BASE_URL + equipeMandante + "+x+" + equipeVisitante + "+" + dataPartida + COMPLEMENTO_URL;
+            return BASE_URL + equipeMandante + "+x+" + equipeVisitante + "+" + dataPartida + COMPLEMENTO_URL;
         }
         catch (final Exception e) {
             LOGGER.error("ERRO: {}", e.getMessage());
