@@ -109,9 +109,7 @@ public class ScraperUtil {
     public StatusPartida getStatusPartida(final Document document) {
         StatusPartida statusPartida = StatusPartida.PARTIDA_NAO_INICIADA;
 
-        boolean isTempoPartida = document.select(DIV_PARTIDA_NAO_INICIADA).isEmpty();
-
-        if (!isTempoPartida) {
+        if (!document.select(DIV_PARTIDA_NAO_INICIADA).isEmpty()) {
             statusPartida = StatusPartida.PARTIDA_NAO_INICIADA;
         }
 
@@ -127,8 +125,7 @@ public class ScraperUtil {
             }
         }
 
-        isTempoPartida = document.select(DIV_PARTIDA_ENCERRADA).isEmpty();
-        return !isTempoPartida ? StatusPartida.PARTIDA_ENCERRADA : statusPartida;
+        return !document.select(DIV_PARTIDA_ENCERRADA).isEmpty() ? StatusPartida.PARTIDA_ENCERRADA : statusPartida;
     }
 
     public String getTempoPartida(final Document document) {

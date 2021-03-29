@@ -41,7 +41,7 @@ public class DatabaseConfig {
     private Long maxLifetime;
 
     @Bean
-    public DataSource getDataSource(){
+    public DataSource createDataSource(){
         final HikariConfig config = new HikariConfig();
         config.setDriverClassName(driverClassName);
         config.setJdbcUrl(url);
