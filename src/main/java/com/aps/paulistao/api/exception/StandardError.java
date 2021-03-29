@@ -24,6 +24,7 @@ public class StandardError implements Serializable {
     private String path;
 
     public StandardError(final HttpStatus httpStatus, final String message, final String path){
+        super();
         this.status    = httpStatus.value();
         this.error     = httpStatus.name();
         this.timestamp = Timestamp.valueOf(LocalDateTime.now()).getTime();
