@@ -1,23 +1,20 @@
 package com.aps.paulistao.api.dto;
 
+import com.aps.paulistao.api.entity.Partida;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EquipeDTO implements Serializable {
+public class PartidaResponseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotBlank
-    private String nome;
-
-    @NotBlank
-    private String urlLogo;
+    private List<Partida> partidas;
 }

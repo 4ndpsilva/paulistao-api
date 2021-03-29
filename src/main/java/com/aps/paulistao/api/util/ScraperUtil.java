@@ -49,29 +49,29 @@ public class ScraperUtil {
             LOGGER.info(title);
 
             final StatusPartida statusPartida = getStatusPartida(document);
-            partidaDTO.setStatusPartida(statusPartida);
+            //partidaDTO.setStatusPartida(statusPartida);
             LOGGER.info("Status da Partida: " + statusPartida);
 
             if (statusPartida != StatusPartida.PARTIDA_NAO_INICIADA) {
                 final String tempoPartida = getTempoPartida(document);
                 LOGGER.info("Tempo da Partida: " + tempoPartida);
-                partidaDTO.setTempoPartida(tempoPartida);
+                //partidaDTO.setTempoPartida(tempoPartida);
 
                 final Integer placarEquipeMandante = getPlacarEquipe(document, DIV_PLACAR_MANDANTE);
                 LOGGER.info("Placar da Equipe Mandante: " + placarEquipeMandante);
-                partidaDTO.setPlacarEquipeMandante(placarEquipeMandante);
+                //partidaDTO.setPlacarEquipeMandante(placarEquipeMandante);
 
                 final Integer placarEquipeVisitante = getPlacarEquipe(document, DIV_PLACAR_VISITANTE);
                 LOGGER.info("Placar da Equipe Visitante: " + placarEquipeVisitante);
-                partidaDTO.setPlacarEquipeVisitante(placarEquipeVisitante);
+                //partidaDTO.setPlacarEquipeVisitante(placarEquipeVisitante);
 
                 final String golsEquipeMandante = getGolsEquipe(document, DIV_GOLS_MANDANTE);
                 LOGGER.info("Gols da Equipe Mandante: " + golsEquipeMandante);
-                partidaDTO.setGolsEquipeMandante(golsEquipeMandante);
+                //partidaDTO.setGolsEquipeMandante(golsEquipeMandante);
 
                 final String golsEquipeVisitante = getGolsEquipe(document, DIV_GOLS_VISITANTE);
                 LOGGER.info("Gols da Equipe Visitante: " + golsEquipeVisitante);
-                partidaDTO.setGolsEquipeVisitante(golsEquipeVisitante);
+                //partidaDTO.setGolsEquipeVisitante(golsEquipeVisitante);
             }
 
             final String nomeEquipeMandante = getNomeEquipe(document, DIV_INFO_MANDANTE);
@@ -84,19 +84,19 @@ public class ScraperUtil {
 
             final String urlLogoEquipeMandante = getUrlLogoEquipe(document, DIV_INFO_MANDANTE);
             LOGGER.info("Logo Equipe Mandante: " + urlLogoEquipeMandante);
-            partidaDTO.setUrlLogoEquipeMandante(urlLogoEquipeMandante);
+            //partidaDTO.setUrlLogoEquipeMandante(urlLogoEquipeMandante);
 
             final String urlLogoEquipeVisitante = getUrlLogoEquipe(document, DIV_INFO_VISITANTE);
             LOGGER.info("Logo Equipe Visitante: " + urlLogoEquipeVisitante);
-            partidaDTO.setUrlLogoEquipeVisitante(urlLogoEquipeVisitante);
+            //partidaDTO.setUrlLogoEquipeVisitante(urlLogoEquipeVisitante);
 
             final Integer placarEstendidoEquipeMandante = getInfoPenalidades(document, MANDANTE);
             LOGGER.info("Placar de Pênaltis do Mandante: " + placarEstendidoEquipeMandante);
-            partidaDTO.setPlacarPenaltisEquipeMandante(placarEstendidoEquipeMandante);
+            //partidaDTO.setPlacarPenaltisEquipeMandante(placarEstendidoEquipeMandante);
 
             final Integer placarEstendidoEquipeVisitante = getInfoPenalidades(document, VISITANTE);
             LOGGER.info("Placar de Pênaltis do Visitante: " + placarEstendidoEquipeVisitante);
-            partidaDTO.setPlacarPenaltisEquipeVisitante(placarEstendidoEquipeVisitante);
+            //partidaDTO.setPlacarPenaltisEquipeVisitante(placarEstendidoEquipeVisitante);
         }
         catch (IOException e) {
             LOGGER.error(e.getMessage());
