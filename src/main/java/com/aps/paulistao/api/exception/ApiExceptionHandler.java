@@ -14,33 +14,33 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<StandardError> badRequestException(final BadRequestException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.BAD_REQUEST, e, request);
+    public ResponseEntity<StandardError> badRequestException(final BadRequestException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.BAD_REQUEST, ex, request);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<StandardError> handleUnauthorizedException(final UnauthorizedException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.UNAUTHORIZED, e, request);
+    public ResponseEntity<StandardError> handleUnauthorizedException(final UnauthorizedException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.UNAUTHORIZED, ex, request);
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<StandardError> handleForbiddenException(final ForbiddenException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.FORBIDDEN, e, request);
+    public ResponseEntity<StandardError> handleForbiddenException(final ForbiddenException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.FORBIDDEN, ex, request);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<StandardError> handleNotFoundException(final NotFoundException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.NOT_FOUND, e, request);
+    public ResponseEntity<StandardError> handleNotFoundException(final NotFoundException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.NOT_FOUND, ex, request);
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
-    public ResponseEntity<StandardError> handleInternalServerErrorException(final InternalServerErrorException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.INTERNAL_SERVER_ERROR, e, request);
+    public ResponseEntity<StandardError> handleInternalServerErrorException(final InternalServerErrorException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.INTERNAL_SERVER_ERROR, ex, request);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<StandardError> handleRuntimeException(final RuntimeException e, HttpServletRequest request){
-        return getResponseEntityError(HttpStatus.INTERNAL_SERVER_ERROR, e, request);
+    public ResponseEntity<StandardError> handleRuntimeException(final RuntimeException ex, HttpServletRequest request){
+        return getResponseEntityError(HttpStatus.INTERNAL_SERVER_ERROR, ex, request);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(status).body(new StandardError(status, ex.getMessage(), request.getContextPath()));
     }
 
-    private ResponseEntity<StandardError> getResponseEntityError(final HttpStatus httpStatus, final RuntimeException e, final HttpServletRequest request){
-        return ResponseEntity.status(httpStatus).body(new StandardError(httpStatus, e.getMessage(), request.getRequestURI()));
+    private ResponseEntity<StandardError> getResponseEntityError(final HttpStatus httpStatus, final RuntimeException ex, final HttpServletRequest request){
+        return ResponseEntity.status(httpStatus).body(new StandardError(httpStatus, ex.getMessage(), request.getRequestURI()));
     }
 }
