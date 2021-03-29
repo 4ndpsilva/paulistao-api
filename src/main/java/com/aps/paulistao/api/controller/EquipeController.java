@@ -32,16 +32,16 @@ public class EquipeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = StandardError.class)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Equipe> findById(@PathVariable("id") Long id){
+    public ResponseEntity<Equipe> findById(@PathVariable Long id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @ApiOperation("Listar equipes")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = EquipeResponseDTO.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = StandardError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = StandardError.class),
             @ApiResponse(code = 403, message = "Forbidden", response = StandardError.class),
-            @ApiResponse(code = 404, message = "Not Found", response = StandardError.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = StandardError.class)
     })
     @GetMapping
