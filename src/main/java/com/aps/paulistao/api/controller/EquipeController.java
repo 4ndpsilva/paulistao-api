@@ -36,7 +36,7 @@ public class EquipeController {
 
     @ApiOperation("Busca de equipe por id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = Equipe.class),
+            @ApiResponse(code = 200, message = "OK", response = EquipeDTO.class),
             @ApiResponse(code = 400, message = "Bad Request", response = StandardError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = StandardError.class),
             @ApiResponse(code = 403, message = "Forbidden", response = StandardError.class),
@@ -44,8 +44,8 @@ public class EquipeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = StandardError.class)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Equipe> findById(@PathVariable Long id){
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<EquipeDTO> findById(@PathVariable Long id){
+        return ResponseEntity.ok().body(mapper.toDTO(service.findById(id)));
     }
 
     @ApiOperation("Listagem de equipes")
@@ -63,18 +63,18 @@ public class EquipeController {
 
     @ApiOperation("Inclusão de equipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created", response = Equipe.class),
+            @ApiResponse(code = 201, message = "Created", response = EquipeDTO.class),
             @ApiResponse(code = 400, message = "Bad Request", response = StandardError.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = StandardError.class),
             @ApiResponse(code = 403, message = "Forbidden", response = StandardError.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = StandardError.class)
     })
     @PostMapping
-    public ResponseEntity<Equipe> save(@RequestBody @Valid EquipeDTO dto, HttpServletResponse response){
+    public ResponseEntity<EquipeDTO> save(@RequestBody @Valid EquipeDTO dto, HttpServletResponse response){
         final Equipe equipe = service.save(mapper.toEntity(dto));
         publisher.publishEvent(new CreateResourceEvent(this, equipe.getId(), response));
         final String uri = response.getHeader("Location");
-        return ResponseEntity.created(URI.create(uri)).body(equipe);
+        return ResponseEntity.created(URI.create(uri)).body(mapper.toDTO(equipe));
     }
 
     @ApiOperation("Alteração de equipe")
@@ -88,8 +88,7 @@ public class EquipeController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid EquipeDTO dto){
-        final Equipe equipe = service.update(id, mapper.toEntity(dto));
-
+        service.update(id, mapper.toEntity(dto));
         return ResponseEntity.noContent().build();
     }
 }

@@ -22,7 +22,7 @@ public class EquipeService {
     }
 
     public Equipe findByNome(final String nome){
-        return repository.findByNome(nome)
+        return repository.findByNome(nome.toUpperCase())
                 .orElseThrow(() -> new NotFoundException("Equipe não encontrada com o nome informado: "+nome));
     }
 
@@ -36,10 +36,10 @@ public class EquipeService {
         return repository.save(equipe);
     }
 
-    public Equipe update(final Long id, final Equipe equipeUpdate) {
+    public void update(final Long id, final Equipe equipeUpdate) {
         final Equipe equipe = findById(id);
         BeanUtils.copyProperties(equipeUpdate, equipe, "id");
-        return save(equipe);
+        save(equipe);
     }
 
     private void validate(final Equipe equipeValidate){
