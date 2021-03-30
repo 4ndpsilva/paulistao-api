@@ -52,11 +52,11 @@ public class EquipeService {
             final Equipe equipe = opEquipe.get();
 
             if(id == null && nome.equalsIgnoreCase(equipe.getNome())){
-                throw new BadRequestException("Já existe uma equipe cadastrada com o nome informado");
+                throw new BadRequestException("Já existe uma equipe cadastrada com o nome informado: " +nome);
             }
 
             if(id != equipe.getId() && nome.equalsIgnoreCase(equipe.getNome())){
-                throw new BadRequestException("Já existe uma equipe cadastrada com o nome informado");
+                throw new BadRequestException("Já existe uma equipe cadastrada com o nome informado: " +nome);
             }
         }
     }
