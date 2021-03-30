@@ -1,5 +1,6 @@
 package com.aps.paulistao.api.dto;
 
+import com.aps.paulistao.api.util.StatusPartida;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,6 +21,9 @@ public class PartidaGoogleDTO implements Serializable {
     private LocalDateTime dataHoraPartida;
     private String localPartida;
 
+    private StatusPartida statusPartida;
+    private String tempoPartida;
+
     private String nomeEquipeMandante;
     private String logoEquipeMandante;
     private Integer placarEquipeMandante;
@@ -31,6 +35,4 @@ public class PartidaGoogleDTO implements Serializable {
     private Integer placarEquipeVisitante;
     private String golsEquipeVisitante;
     private Integer placarPenaltisVisitante;
-
-    private String tempoPartida;
 }

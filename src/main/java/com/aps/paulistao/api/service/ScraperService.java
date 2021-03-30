@@ -1,8 +1,9 @@
 package com.aps.paulistao.api.service;
 
-import com.aps.paulistao.api.dto.PartidaDTO;
+import com.aps.paulistao.api.dto.PartidaGoogleDTO;
 import com.aps.paulistao.api.entity.Partida;
 import com.aps.paulistao.api.util.ScraperUtil;
+import com.aps.paulistao.api.util.StatusPartida;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,11 @@ public class ScraperService {
 
             partidas.forEach(p -> {
                 final String url = scraperUtil.montarUrlPesquisa(p.getMandante().getNome(), p.getVisitante().getNome(), p.getDataHoraPartida().toLocalDate().toString());
-                final PartidaDTO dtoGoogle = scraperUtil.getInfoPartida(url);
-                partidaService.update(p.getId(), p);
+                final PartidaGoogleDTO dtoGoogle = scraperUtil.getInfoPartida(url);
+
+                if (dtoGoogle.getStatusPartida() != StatusPartida.PARTIDA_NAO_INICIADA) {
+                    partidaService.update(p, dtoGoogle);
+                }
             });
         }
     }
