@@ -16,11 +16,9 @@ public class ScraperService {
     private final PartidaService partidaService;
 
     public void verificarPartidasPorPeriodo(){
-        final Integer quantidadePartida = partidaService.findQuantidadePartidasPorPeriodo();
+        final List<Partida> partidas = partidaService.findPartidasPorPeriodo();
 
-        if(quantidadePartida > 0){
-            final List<Partida> partidas = partidaService.findPartidasPorPeriodo();
-
+        if(partidas.size() > 0){
             partidas.forEach(p -> {
                 final String url = scraperUtil.montarUrlPesquisa(p.getMandante().getNome(), p.getVisitante().getNome(), p.getDataHoraPartida().toLocalDate().toString());
                 final PartidaGoogleDTO dtoGoogle = scraperUtil.getInfoPartida(url);

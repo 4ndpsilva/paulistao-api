@@ -1,8 +1,6 @@
 package com.aps.paulistao.api.dto;
 
 import com.aps.paulistao.api.util.StatusPartida;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +14,6 @@ import java.time.LocalDateTime;
 public class PartidaGoogleDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(example = "dd/mm/yyyy hh:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
     private LocalDateTime dataHoraPartida;
     private String localPartida;
 

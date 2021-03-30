@@ -55,7 +55,7 @@ public class PartidaTask {
 
     public void initScheduler(final String diaSemana){
         this.saveLogInfo(String.format("%s: %s", diaSemana, DateUtil.formatDate(LocalDateTime.now(), DATE_TIME_FORMAT)));
-        //scraperService.verificarPartidasPorPeriodo();
+        scraperService.verificarPartidasPorPeriodo();
     }
 
     private void saveLogInfo(final String message){

@@ -52,10 +52,6 @@ public class PartidaService {
         save(partida);
     }
 
-    public Integer findQuantidadePartidasPorPeriodo() {
-        return repository.findQuantidadePartidasPorPeriodo();
-    }
-
     public List<Partida> findPartidasPorPeriodo() {
         return repository.findPartidasPorPeriodo();
     }
