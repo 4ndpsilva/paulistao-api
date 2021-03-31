@@ -22,12 +22,6 @@ public class PartidaTask {
 
     private final ScraperService scraperService;
 
-
-    @Scheduled(cron = "0/30 * 00-06 * * TUE", zone = TIME_ZONE)
-    public void executeTue(){
-        initScheduler("executeTue()");
-    }
-
     @Scheduled(cron = "0/30 * 19-23 * * WED", zone = TIME_ZONE)
     public void executeWed(){
         initScheduler("executeWed()");
@@ -54,7 +48,7 @@ public class PartidaTask {
     }
 
     public void initScheduler(final String diaSemana){
-        this.saveLogInfo(String.format("%s: %s", diaSemana, DateUtil.formatDate(LocalDateTime.now(), DATE_TIME_FORMAT)));
+        this.saveLogInfo(String.format("%s: %s", diaSemana, DateUtil.format(LocalDateTime.now(), DATE_TIME_FORMAT)));
         scraperService.verificarPartidasPorPeriodo();
     }
 
