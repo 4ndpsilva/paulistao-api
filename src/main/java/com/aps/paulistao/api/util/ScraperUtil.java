@@ -1,6 +1,6 @@
 package com.aps.paulistao.api.util;
 
-import com.aps.paulistao.api.dto.PartidaDTO;
+import com.aps.paulistao.api.dto.PartidaGoogleDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,8 +37,8 @@ import static com.aps.paulistao.api.util.Constants.VISITANTE;
 public class ScraperUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScraperUtil.class);
 
-    public PartidaDTO getInfoPartida(final String url) {
-        final PartidaDTO partidaDTO = new PartidaDTO();
+    public PartidaGoogleDTO getInfoPartida(final String url) {
+        final PartidaGoogleDTO partidaDTO = new PartidaGoogleDTO();
 
         try {
             LOGGER.info(url);
@@ -84,19 +84,19 @@ public class ScraperUtil {
 
             final String urlLogoEquipeMandante = getUrlLogoEquipe(document, DIV_INFO_MANDANTE);
             LOGGER.info("Logo Equipe Mandante: " + urlLogoEquipeMandante);
-            partidaDTO.setUrlLogoEquipeMandante(urlLogoEquipeMandante);
+            partidaDTO.setLogoEquipeMandante(urlLogoEquipeMandante);
 
             final String urlLogoEquipeVisitante = getUrlLogoEquipe(document, DIV_INFO_VISITANTE);
             LOGGER.info("Logo Equipe Visitante: " + urlLogoEquipeVisitante);
-            partidaDTO.setUrlLogoEquipeVisitante(urlLogoEquipeVisitante);
+            partidaDTO.setLogoEquipeVisitante(urlLogoEquipeVisitante);
 
             final Integer placarEstendidoEquipeMandante = getInfoPenalidades(document, MANDANTE);
             LOGGER.info("Placar de Pênaltis do Mandante: " + placarEstendidoEquipeMandante);
-            partidaDTO.setPlacarPenaltisEquipeMandante(placarEstendidoEquipeMandante);
+            partidaDTO.setPlacarPenaltisMandante(placarEstendidoEquipeMandante);
 
             final Integer placarEstendidoEquipeVisitante = getInfoPenalidades(document, VISITANTE);
             LOGGER.info("Placar de Pênaltis do Visitante: " + placarEstendidoEquipeVisitante);
-            partidaDTO.setPlacarPenaltisEquipeVisitante(placarEstendidoEquipeVisitante);
+            partidaDTO.setPlacarPenaltisVisitante(placarEstendidoEquipeVisitante);
         }
         catch (IOException e) {
             LOGGER.error(e.getMessage());
@@ -109,9 +109,7 @@ public class ScraperUtil {
     public StatusPartida getStatusPartida(final Document document) {
         StatusPartida statusPartida = StatusPartida.PARTIDA_NAO_INICIADA;
 
-        boolean isTempoPartida = document.select(DIV_PARTIDA_NAO_INICIADA).isEmpty();
-
-        if (!isTempoPartida) {
+        if (!document.select(DIV_PARTIDA_NAO_INICIADA).isEmpty()) {
             statusPartida = StatusPartida.PARTIDA_NAO_INICIADA;
         }
 
@@ -127,8 +125,7 @@ public class ScraperUtil {
             }
         }
 
-        isTempoPartida = document.select(DIV_PARTIDA_ENCERRADA).isEmpty();
-        return !isTempoPartida ? StatusPartida.PARTIDA_ENCERRADA : statusPartida;
+        return !document.select(DIV_PARTIDA_ENCERRADA).isEmpty() ? StatusPartida.PARTIDA_ENCERRADA : statusPartida;
     }
 
     public String getTempoPartida(final Document document) {

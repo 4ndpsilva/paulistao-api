@@ -1,11 +1,15 @@
 package com.aps.paulistao.api.dto;
 
-import com.aps.paulistao.api.util.StatusPartida;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,18 +17,17 @@ import java.io.Serializable;
 public class PartidaDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private StatusPartida statusPartida;
-    private String tempoPartida;
-    
+    @NotBlank
     private String nomeEquipeMandante;
-    private String urlLogoEquipeMandante;
-    private Integer placarEquipeMandante;
-    private String golsEquipeMandante;
-    private Integer placarPenaltisEquipeMandante;
 
+    @NotBlank
     private String nomeEquipeVisitante;
-    private String urlLogoEquipeVisitante;
-    private Integer placarEquipeVisitante;
-    private String golsEquipeVisitante;
-    private Integer placarPenaltisEquipeVisitante;
+
+    @NotBlank
+    private String localPartida;
+
+    @NotNull
+    @ApiModelProperty(example = "dd/mm/yyyy hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataHoraPartida;
 }
