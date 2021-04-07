@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EquipeResponseDTO implements Serializable {
+public class EquipeResponseDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<Equipe> equipes;

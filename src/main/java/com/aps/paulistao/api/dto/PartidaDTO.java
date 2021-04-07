@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PartidaDTO implements Serializable {
+public class PartidaDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank

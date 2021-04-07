@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EquipeDTO implements Serializable {
+public class EquipeDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank

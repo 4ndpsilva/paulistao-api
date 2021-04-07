@@ -7,9 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -19,12 +16,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "TB_EQUIPE")
-public class Equipe implements Serializable {
+public class Equipe extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1l;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "NOME")
     private String nome;

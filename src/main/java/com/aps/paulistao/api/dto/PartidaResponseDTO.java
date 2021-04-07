@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PartidaResponseDTO implements Serializable {
+public class PartidaResponseDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<Partida> partidas;

@@ -5,20 +5,25 @@ import com.aps.paulistao.api.entity.Equipe;
 import com.aps.paulistao.api.exception.BadRequestException;
 import com.aps.paulistao.api.exception.NotFoundException;
 import com.aps.paulistao.api.repository.EquipeRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
-public class EquipeService {
-    private final EquipeRepository repository;
+public class EquipeService extends BaseService<Equipe>{
+    @Autowired
+    private EquipeRepository repository;
 
-    public Equipe findById(final Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Equipe não encontrada com o id informado: "+id));
+    public EquipeService(){
+        super(Equipe.class);
+    }
+
+    @Override
+    public Equipe save(final Equipe equipe) {
+        validate(equipe);
+        equipe.setNome(equipe.getNome().toUpperCase());
+        return super.save(equipe);
     }
 
     public Equipe findByNome(final String nome){
@@ -27,19 +32,7 @@ public class EquipeService {
     }
 
     public EquipeResponseDTO findAll() {
-        return new EquipeResponseDTO(repository.findAll());
-    }
-
-    public Equipe save(final Equipe equipe) {
-        validate(equipe);
-        equipe.setNome(equipe.getNome().toUpperCase());
-        return repository.save(equipe);
-    }
-
-    public void update(final Long id, final Equipe equipeUpdate) {
-        final Equipe equipe = findById(id);
-        BeanUtils.copyProperties(equipeUpdate, equipe, "id");
-        save(equipe);
+        return new EquipeResponseDTO(super.find());
     }
 
     private void validate(final Equipe equipeValidate){

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PartidaGoogleDTO implements Serializable {
+public class PartidaGoogleDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private LocalDateTime dataHoraPartida;
