@@ -51,12 +51,10 @@ public abstract class BaseService<T extends BaseEntity> {
             return opEntity.get();
         }
 
-        throw new NotFoundException("final ");
+        throw new NotFoundException();
     }
 
     public List<T> find(){
         return repository.findAll();
     }
-
-    //public abstract void validate();
 }
